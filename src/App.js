@@ -7,6 +7,7 @@ import { login, logout, selectUser } from "./features/userSlice";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import "./App.css";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {
   const user = useSelector(selectUser);
@@ -25,12 +26,12 @@ function App() {
         console.log(userAuth);
       } else {
         // Logged out
-        dispatch(logout);
+        dispatch(logout());
       }
     });
 
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">
@@ -39,6 +40,7 @@ function App() {
           <LoginScreen />
         ) : (
           <Routes>
+            <Route path="/profile" element={<ProfileScreen />} />
             <Route exact path="/" element={<HomeScreen />} />
           </Routes>
         )}
